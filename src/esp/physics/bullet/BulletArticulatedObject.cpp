@@ -727,8 +727,12 @@ std::unordered_map<int, int> BulletArticulatedObject::createMotorsForAllDofs(
     int motorId = createJointMotor(linkIx, settingsCopy);
     motorIdsToLinks[motorId] = linkIx;
   }
-  Mn::Debug{} << "BulletArticulatedObject::createMotorsForAllDofs(): "
-              << motorIdsToLinks;
+  // Mn::Debug{} << "BulletArticulatedObject::createMotorsForAllDofs(): "
+  //             << motorIdsToLinks;
+  LOG(INFO) << "BulletArticulatedObject::createMotorsForAllDofs():";
+  for (auto& it : motorIdsToLinks) {
+    LOG(INFO) << "(" << it.first << ", " << it.second << ")";
+  }
   return motorIdsToLinks;
 }
 

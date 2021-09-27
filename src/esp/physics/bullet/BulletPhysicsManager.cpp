@@ -195,16 +195,22 @@ int BulletPhysicsManager::addArticulatedObjectFromURDF(
               .first)
           .first;
 
-  Magnum::Debug{} << "BulletPhysicsManager::addArticulatedObjectFromURDF: "
-                     "simpleObjectHandle : "
-                  << simpleArtObjHandle;
+  // Magnum::Debug{} << "BulletPhysicsManager::addArticulatedObjectFromURDF: "
+  //                    "simpleObjectHandle : "
+  //                 << simpleArtObjHandle;
+  LOG(INFO) << "BulletPhysicsManager::addArticulatedObjectFromURDF: "
+               "simpleObjectHandle : "
+            << simpleArtObjHandle;
 
   std::string newArtObjectHandle =
       articulatedObjectManager_->getUniqueHandleFromCandidate(
           simpleArtObjHandle);
-  Magnum::Debug{} << "BulletPhysicsManager::addArticulatedObjectFromURDF: "
-                     "newArtObjectHandle : "
-                  << newArtObjectHandle;
+  // Magnum::Debug{} << "BulletPhysicsManager::addArticulatedObjectFromURDF: "
+  //                    "newArtObjectHandle : "
+  //                 << newArtObjectHandle;
+  LOG(INFO) << "BulletPhysicsManager::addArticulatedObjectFromURDF: "
+               "newArtObjectHandle : "
+            << newArtObjectHandle;
 
   existingArticulatedObjects_.at(articulatedObjectID)
       ->setObjectName(newArtObjectHandle);
@@ -683,7 +689,7 @@ int BulletPhysicsManager::createRigidConstraint(
       mbB = static_cast<BulletArticulatedObject*>(
                 existingArticulatedObjects_.at(settings.objectIdB).get())
                 ->btMultiBody_.get();
-      ESP_CHECK(mbA->getNumLinks() > settings.linkIdA,
+      ESP_CHECK(mbB->getNumLinks() > settings.linkIdB,
                 "::createRigidConstraint - linkB("
                     << settings.linkIdB
                     << ") is invalid for ArticulatedObject with "

@@ -57,6 +57,7 @@ class Configuration:
     agents: List[AgentConfiguration]
     # An existing Metadata Mediator can also be used to construct a SimulatorBackend
     metadata_mediator: Optional[MetadataMediator] = None
+    force_create_renderer: Optional[bool] = False
 
 
 @attr.s(auto_attribs=True)
@@ -89,9 +90,13 @@ class Simulator(SimulatorBackend):
                 "Config has not agents specified.  Must specify at least 1 agent"
             )
 
-        config.sim_cfg.create_renderer = any(
-            map(lambda cfg: len(cfg.sensor_specifications) > 0, config.agents)
-        )
+        if config.force_create_renderer:
+            config.sim_cfg.create_renderer = True
+        else:
+            config.sim_cfg.create_renderer = any(
+                map(lambda cfg: len(cfg.sensor_specifications) > 0, config.agents)
+            )
+
         config.sim_cfg.load_semantic_mesh = any(
             map(
                 lambda cfg: any(
