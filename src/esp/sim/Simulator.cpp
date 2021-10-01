@@ -278,6 +278,7 @@ Simulator::setSceneInstanceAttributes(const std::string& activeSceneName) {
                  << " : loaded as expected type : " << success;
 
   }  // if semantic scene descriptor specified in scene instance
+  else semanticScene_ = scene::SemanticScene::create();
 
   // 3. Specify frustumCulling based on value from config
   frustumCulling_ = config_.frustumCulling;
